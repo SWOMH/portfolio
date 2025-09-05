@@ -1,0 +1,176 @@
+
+.home_page {
+    position: relative;
+    min-height: 100vh;
+    /* overflow-x: hidden; /* только по горизонтали скрываем */
+    /* overflow-y: auto; фон не будет растягивать скролл */ 
+    overflow: hidden;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #fff;
+  }
+  
+  /* обёртка фона (Plasma) — занимает всю область */
+  .bg_wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none; /* фон не мешает кликам */
+  }
+  
+  /* поверх плазмы — декоративные диагональные линии (как на рисунке) */
+  .bg_overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    /* диагональные линии: тонкие светлые штрихи */
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 2px,
+      transparent 2px,
+      transparent 50px
+    );
+  }
+  
+
+  .hero_section {
+    position: relative;   /* чтобы .bg_wrapper absolute позиционировался внутри неё */
+    height: 100vh;        /* занимает весь экран */
+    min-height: 100vh;    /* на всякий случай */
+    width: 100%;
+    overflow: hidden;
+    display: block;       /* можно flex, если нужно центрирование контента */
+  }
+  
+  /* главный контейнер контента поверх фона */
+  .content_layout {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 10.5rem;
+    align-items: flex-start;   /* либо center, если хочешь вертикально центрировать */
+    padding: 3.5rem 4rem;
+    box-sizing: border-box;
+    height: 100%;
+    flex-wrap: wrap;
+  }
+  /* левая колонка — большой блок приветствия */
+  .hero {
+    flex: 1 1 60%;
+    max-width: 65%;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .hero_font {
+    font-family: "Source Code Pro", monospace;
+  }
+  /* сама карточка приветствия */
+  .hero_card {
+    font-family: "Source Code Pro", monospace;
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    width: 100%;
+    overflow-wrap: break-word;
+    transform: translateY(0);
+  }
+  
+  /* стили текста внутри карточки */
+  .greeting_title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem); /* большой заголовок "Текст" */
+    line-height: 1;
+    margin: 0 0 0.25rem 0;
+    letter-spacing: 0.02em;
+  }
+  
+  .greeting_sub {
+    font-size: 1.6rem; /* "Приветствие" */
+    margin: 0;
+    opacity: 0.95;
+  }
+  
+  /* место под карточкой — если нужен прокручиваемый блок */
+  .hero_scroll {
+    height: 360px; /* подстраивай под высоту */
+    overflow-y: auto;
+    padding-top: 1rem;
+  }
+  
+  /* правая колонка — профиль */
+  .profile_wrapper {
+    width: 320px; /* фиксированная ширина карточки справа */
+    flex: 0 0 320px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    /* можно чуть поднять карточку, чтобы она была смещена вниз/вверх */
+    margin-top: 0.5rem;
+  }
+  
+  /* Индикатор в левом-нижнем углу (маленький квадрат с подписью) */
+  .legend_plasma {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+  }
+  
+  .legend_plasma .box {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    background: linear-gradient(90deg,#a6c7ff,#bde0ff);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  
+
+  @media (max-width: 1024px) {
+    .content_layout {
+      gap: 2rem;
+    }
+    .hero {
+      max-width: 100%;
+    }
+    .profile_wrapper {
+      flex: 0 0 260px;
+      max-width: 260px;
+    }
+  }
+  
+  /* Мобильные устройства */
+  @media (max-width: 768px) {
+    .content_layout {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .hero {
+      max-width: 100%;
+    }
+    .profile_wrapper {
+      order: -1; /* покажем карточку профиля сверху */
+      width: 100%;
+      max-width: 100%;
+      justify-content: center;
+    }
+    .hero_card {
+      padding: 1.5rem;
+    }
+  }

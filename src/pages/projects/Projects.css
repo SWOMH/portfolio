@@ -1,0 +1,271 @@
+/* ========== Layout ========== */
+.pg-container {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+  }
+  
+  /* grid: 1 / 2 / 3 columns */
+  .pg-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+  @media (min-width: 700px) {
+    .pg-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1100px) {
+    .pg-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  /* ========== Card ========== */
+  .pg-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    background: #0f0f10;
+    color: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 30px rgba(2,6,23,0.45);
+    transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms;
+    cursor: pointer;
+    padding: 0;
+  }
+  .pg-card:focus { outline: 3px solid rgba(126,58,234,0.18); outline-offset: 4px; }
+  .pg-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(2,6,23,0.55); }
+  
+  /* media (image) */
+  .pg-media {
+    position: relative;
+    width: 100%;
+    height: 220px;            /* фиксированная высота медиаблока */
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #111;
+  }
+  .pg-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* обрезаем картинку, ограничиваем по размеру */
+    transition: transform 420ms ease, opacity 300ms;
+  }
+  .pg-card:hover .pg-image { transform: scale(1.04); }
+  
+  /* gradient overlay (color tint near bottom) */
+  .pg-gradient {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 56%;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.8) 100%);
+    transition: opacity 200ms;
+  }
+  
+  /* color variants (set project.gradientClass to 'violet'/'green'/'pink') */
+  .pg-card.violet .pg-gradient {
+    background: linear-gradient(180deg, rgba(126,58,234,0) 0%, rgba(126,58,234,0.28) 35%, rgba(126,58,234,0.45) 60%, rgba(8,6,30,0.95) 100%);
+  }
+  .pg-card.green .pg-gradient {
+    background: linear-gradient(180deg, rgba(27,184,119,0) 0%, rgba(27,184,119,0.26) 35%, rgba(27,184,119,0.44) 60%, rgba(8,12,10,0.95) 100%);
+  }
+  .pg-card.pink .pg-gradient {
+    background: linear-gradient(180deg, rgba(235,82,128,0) 0%, rgba(235,82,128,0.26) 35%, rgba(235,82,128,0.44) 60%, rgba(12,6,30,0.95) 100%);
+  }
+  
+  /* body (text) */
+  .pg-body {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  }
+  .pg-title { margin: 0; font-size: 1.05rem; color: #f6f7fb; font-weight: 600; }
+  .pg-sub { margin: 0; color: rgba(255,255,255,0.72); font-size: 0.92rem; }
+  .pg-username { color: rgba(255,255,255,0.42); font-size: 0.88rem; }
+  
+  /* small responsive tweak: reduce media block on small screens */
+  @media (max-width: 420px) {
+    .pg-media { height: 180px; }
+  }
+  
+  /* subtle bottom accent bar appears on hover */
+  .pg-card::after {
+    content: "";
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(126,58,234,0.9), rgba(27,184,119,0.9));
+    opacity: 0;
+    transition: opacity 180ms;
+  }
+  .pg-card:hover::after { opacity: 1; }
+  
+  /* ========== Modal (overlay + window) ========== */
+  .pg-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(3,3,5,0.65);
+    z-index: 1400;
+    padding: 28px;
+  }
+  
+  /* modal box */
+  .pg-modal {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    border-radius: 14px;
+    background: #0f1113;
+    color: #fff;
+    box-shadow: 0 30px 90px rgba(2,6,23,0.6);
+    overflow: hidden;
+    transform-origin: center;
+    animation: pgModalShow 220ms cubic-bezier(.2,.9,.2,1);
+  }
+  @keyframes pgModalShow {
+    from { transform: translateY(8px) scale(.98); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  
+  /* close button */
+  .pg-modal-close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    z-index: 2;
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .pg-modal-close:hover { background: rgba(0,0,0,0.6); }
+  
+  /* modal grid: image left, content right */
+  .pg-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  @media (max-width: 860px) {
+    .pg-modal-grid { grid-template-columns: 1fr; }
+  }
+  
+  /* left: image */
+  .pg-modal-media { background: #000; }
+  .pg-modal-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 560px;
+    object-fit: cover;
+  }
+  
+  /* right: content */
+  .pg-modal-body {
+    padding: 24px;
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .pg-modal-title { margin: 0; font-size: 1.5rem; color: #fff; }
+  .pg-modal-sub { margin: 0; color: rgba(255,255,255,0.75); }
+  .pg-modal-desc { color: rgba(255,255,255,0.88); line-height: 1.45; }
+  
+  /* technologies block */
+  .pg-modal-section { margin-top: 6px; }
+  .pg-modal-sec-title { margin: 0 0 8px 0; color: rgba(255,255,255,0.9); font-weight: 600; }
+  
+  /* tech chips layout — красиво и не просто точками */
+  .pg-tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  /* single chip */
+  .pg-tech {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    color: #eee;
+    box-shadow: 0 4px 18px rgba(2,6,23,0.45);
+  }
+  
+  /* small colored dot on chip */
+  .pg-tech-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #9b72ff, #22d39a);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    flex-shrink: 0;
+  }
+  
+  /* tech text styling */
+  .pg-tech-text { display: inline-block; font-weight: 500; color: #f4f6f9; }
+  
+  /* no-tech fallback */
+  .pg-no-tech { color: rgba(255,255,255,0.5); }
+  
+  /* modal actions (buttons) */
+  .pg-modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    align-items: center;
+  }
+  
+  /* main primary demo button */
+  .pg-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  /* demo button active */
+  .pg-btn-demo {
+    background: linear-gradient(90deg, #7e3aea, #1bb877);
+    color: white;
+    box-shadow: 0 8px 26px rgba(30, 20, 60, 0.45);
+  }
+  
+  /* disabled */
+  .pg-btn-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  
+  /* secondary close button */
+  .pg-btn-close {
+    background: transparent;
+    color: #dbe2ff;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
