@@ -66,9 +66,8 @@ function HeadPage() {
                 />
                 </div>
               
-            {/* Дополнительный вертикальный скролл-контент, если нужно */}
+            {/* Дополнительный вертикальный скролл-контент */}
             <div className="hero_card">
-            {/* <div style={{ marginTop: '4rem' }}> */}
               <DecryptedText
                 text={portfolio_text}
                 animateOn="view"
@@ -77,7 +76,6 @@ function HeadPage() {
                 revealDirection="start"
               />
             </div>
-            {/* </div> */}
           </div>
 
           {/* Правая колонка: профильная карточка */}
