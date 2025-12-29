@@ -74,7 +74,7 @@ function App() {
     <>
       <HeadPage />      
       <ProjectGallery projects={projects} />
-      <ScrollItems />
+      {/* <ScrollItems />  // Да чет вообще урод какой-то получился. лучше прост скрыть*/} 
     </>
   );
 }

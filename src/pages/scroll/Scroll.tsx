@@ -9,11 +9,11 @@ function ScrollItems () {
         <ScrollStack>
           <ScrollStackItem
           itemClassName="one_item">
-            <h1>Достигнут конец портфолио</h1>
+            <h2>Достигнут конец портфолио</h2>
           </ScrollStackItem>
           <ScrollStackItem
           itemClassName="seccond_item">
-            <h1>Начало нашего сотрудничества</h1>
+            <h2>Начало нашего сотрудничества</h2>
           </ScrollStackItem>
           <ScrollStackItem
           itemClassName="tre_item">
