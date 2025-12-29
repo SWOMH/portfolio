@@ -41,7 +41,7 @@
 
 .hero_section {
   position: relative;   /* чтобы .bg_wrapper absolute позиционировался внутри неё */
-  height: 100vh;        /* занимает весь экран */
+  height: auto;        /* если на 100 ставить, то описание выходит за экран на маленьких мониторах */
   min-height: 100vh;    /* на всякий случай */
   width: 100%;
   overflow: hidden;

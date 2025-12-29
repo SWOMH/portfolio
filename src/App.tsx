@@ -45,7 +45,7 @@ const projects: Project[] = [
     subtitle: 'Закрытый проект',
     image: tre_scrin,
     description: 'Мобильное приложение, которое не вышло в прод по внутренним причинам. (Новостная лента/составление документов/чат поддержки/профиль)',
-    technologies: ['Flutter', 'bloc'],
+    technologies: ['Flutter', 'bloc', 'provider', 'firebase'],
     gradientClass: 'pink',
   },
   {
@@ -59,11 +59,11 @@ const projects: Project[] = [
   },
   {
     id: 6,
-    title: 'Расписание',
+    title: 'Ретейлика',
     subtitle: 'Закрытый проект',
     image: fi_scrin,
-    description: 'Календарь расписания выходов сотрудников на работу/отпусков/предсказания выходов в зависимости от предполагаемой нагрузки на ресторан',
-    technologies: ['React', 'redux toolkit'],
+    description: 'Проект для проверок в ресторанах. Ежедневные/.../кастомные проверки. Что-то вроде тестирования',
+    technologies: ['React', 'redux toolkit', 'FastApi', 'Celery', 'redis', 'Postgres', 'kafka', 'websocket'],
     gradientClass: 'pink',
   },
 ];

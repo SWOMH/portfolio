@@ -72,7 +72,7 @@ function HeadPage() {
                 text={portfolio_text}
                 animateOn="view"
                 speed={10}
-                sequential={true}
+                sequential={false}
                 revealDirection="start"
               />
             </div>
